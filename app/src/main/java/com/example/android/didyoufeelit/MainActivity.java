@@ -15,9 +15,12 @@
  */
 package com.example.android.didyoufeelit;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import java.net.URL;
 
 /**
  * Displays the perceived strength of a single earthquake event based on responses from people who
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         updateUi(earthquake);
     }
 
+
+
     /**
      * Update the UI with the given earthquake information.
      */
@@ -54,4 +59,12 @@ public class MainActivity extends AppCompatActivity {
         TextView magnitudeTextView = (TextView) findViewById(R.id.perceived_magnitude);
         magnitudeTextView.setText(earthquake.perceivedStrength);
     }
+
+    /**
+     * For background thread we will user AsyncTask
+     */
+    private class EarthqaukeAsynTask extends AsyncTask<URL, Integer, Long>    {
+
+    }
+
 }
