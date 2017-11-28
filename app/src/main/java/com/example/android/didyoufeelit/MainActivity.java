@@ -63,8 +63,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * For background thread we will user AsyncTask
      */
-    private class EarthqaukeAsynTask extends AsyncTask<URL, Integer, Long>    {
-
+    private class EarthqaukeAsyncTask extends AsyncTask<URL, Integer, Long>    {
+        @Override
+        protected Long doInBackground(URL... urls) {
+            return null;
+        }
     }
 
 }
