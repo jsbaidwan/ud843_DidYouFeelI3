@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Perform the HTTP request for earthquake data and process the response.
-        Event earthquake = Utils.fetchEarthquakeData(USGS_REQUEST_URL);
 
         // Update the information displayed to the user.
         updateUi(earthquake);
@@ -61,12 +59,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * For background thread we will user AsyncTask
+     * To perform network request on background thread, and then update the UI with
+     * the first earthquake in the response
      */
-    private class EarthqaukeAsyncTask extends AsyncTask<URL, Integer, Long>    {
-        @Override
-        protected Long doInBackground(URL... urls) {
-            return null;
+    private class EarthqaukeAsyncTask extends AsyncTask<String, Void, Event>    {
+
+        /**
+         * This is method is invoked in the background thread, so we can perform
+         * long-running operations like making a network request.
+         *
+         * It is not okay to update UI from background thread, so we just return
+         * an object as result.
+         */
+
+        protected Event doInBackground(String... urls) {
+            Event result = Utils.fetchEarthquakeData(urls[0]);
+            return result;
         }
     }
 
