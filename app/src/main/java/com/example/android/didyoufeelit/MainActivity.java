@@ -37,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        // Update the information displayed to the user.
-        updateUi(earthquake);
+        // Create an {@link AsyncTask} to perform the HTTP request to the given url
+        // on the background thread. When the result is received on the main UI thread,
+        // then update the UI.
+        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
+        task.execute(USGS_REQUEST_URL);
     }
 
 
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
      * To perform network request on background thread, and then update the UI with
      * the first earthquake in the response
      */
-    private class EarthqaukeAsyncTask extends AsyncTask<String, Void, Event>    {
+    private class EarthquakeAsyncTask extends AsyncTask<String, Void, Event>    {
 
         /**
          * This is method is invoked in the background thread, so we can perform
@@ -76,6 +78,14 @@ public class MainActivity extends AppCompatActivity {
             Event result = Utils.fetchEarthquakeData(urls[0]);
             return result;
         }
-    }
 
+        /**
+         * This is method is invoked on the main UI thread after the background work
+         * has been done
+         */
+
+        protected void onPostExecute(Event result)  {
+            updateUi(result);
+        }
+    }
 }
