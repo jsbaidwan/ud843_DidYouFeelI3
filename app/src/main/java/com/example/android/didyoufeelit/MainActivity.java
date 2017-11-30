@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private class EarthquakeAsyncTask extends AsyncTask<String, Void, Event>    {
 
+
         /**
          * This is method is invoked in the background thread, so we can perform
          * long-running operations like making a network request.
@@ -75,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
          */
 
         protected Event doInBackground(String... urls) {
+
+            // Don't perform the request if there is no URLs, or the first URL is null
+            if (urls.length > 1 || urls[0] == null){
+                return null;
+            }
+
             Event result = Utils.fetchEarthquakeData(urls[0]);
             return result;
         }
