@@ -92,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
          */
 
         protected void onPostExecute(Event result)  {
+            // If there is no result, do nothing
+            if(result == null)    {
+                return;
+            }
             updateUi(result);
         }
     }
