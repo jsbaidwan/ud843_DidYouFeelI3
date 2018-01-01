@@ -85,7 +85,7 @@ public final class Utils {
         if (url == null) {
             return jsonResponse;
         }
-
+        // urlConnection object is null to return null if there is no connection
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
         try {
