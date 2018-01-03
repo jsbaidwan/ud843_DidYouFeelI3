@@ -87,6 +87,7 @@ public final class Utils {
         }
         // urlConnection object is null to return null if there is no connection
         HttpURLConnection urlConnection = null;
+        // inputStream is null to avoid garbage value
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
